@@ -1,30 +1,31 @@
-package com.winternari.sns_project.domain.user.dto.response;
+package com.winternari.sns_project.domain.chat.entity;
+
 
 import com.winternari.sns_project.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "refresh_tokens")
+@Table(name = "tb_user_room")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class RefreshToken {
+public class UserRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    private String token;
+    @ManyToOne
+    @JoinColumn(name = "chatroom_id")
+    private ChatRoom chatRoom;
 
-    private Date expiryDate;
 }
