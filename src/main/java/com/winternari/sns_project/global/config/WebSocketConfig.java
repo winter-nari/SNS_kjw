@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:3000", "http://localhost:8080") // 주소 명시
+                .setAllowedOrigins("http://localhost:3000", "http://localhost:8080", "https://0ee3f11db879.ngrok-free.app") // 주소 명시
                 .addInterceptors(new AuthHandshakeInterceptor(jwtTokenProvider, customUserDetailService))  // 인증 인터셉터 추가
                 .withSockJS();
     }

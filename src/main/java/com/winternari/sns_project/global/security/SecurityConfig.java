@@ -51,7 +51,7 @@ public class SecurityConfig {
                 // CORS 설정 추가 (예시)
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                    corsConfig.setAllowedOrigins(List.of("https://test1-fbe39.web.app/", "http://localhost:3000", "http://localhost:8080")); // 프론트엔드 도메인 설정
+                    corsConfig.setAllowedOrigins(List.of("https://test1-fbe39.web.app", "http://localhost:3000", "http://localhost:8080", "https://0ee3f11db879.ngrok-free.app")); // 프론트엔드 도메인 설정
                     corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(List.of("*"));
                     corsConfig.setAllowCredentials(true);
