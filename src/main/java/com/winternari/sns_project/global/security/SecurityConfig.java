@@ -44,7 +44,7 @@ public class SecurityConfig {
 
     // SecurityFilterChain 구성
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, RequestAttributes requestAttributes) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // CSRF 활성화 (쿠키 기반 인증과 함께 쓴다면 권장)
                 .csrf(csrf -> csrf
@@ -58,7 +58,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/oauth/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/oauth/**").permitAll()
                         .requestMatchers("/image/**", "/uploads/**").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                         .requestMatchers("/ws/**", "/topic/**", "/app/**").permitAll() // WebSocket 인증
