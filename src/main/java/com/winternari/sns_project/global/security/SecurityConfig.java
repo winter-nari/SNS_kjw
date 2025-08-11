@@ -40,18 +40,6 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 프론트 도메인만 허용
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true); // 쿠키, 인증 헤더 허용
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
 
     // SecurityFilterChain 구성
     @Bean
@@ -63,23 +51,6 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .disable() // 쿠키 인증과 함께라면 disable하지 말고 위처럼 설정 권장
                 )
-                .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .disable()
-                )
-
-
-//                // CORS 설정 추가 (예시)
-//                .cors(cors -> cors.configurationSource(request -> {
-//                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-//                    corsConfig.setAllowedOrigins(List.of("https://winna-74db4.web.app", "http://localhost:3000", "http://localhost:8080")); // 프론트엔드 도메인 설정
-//                    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//                    corsConfig.setAllowedHeaders(List.of("*"));
-//                    corsConfig.setAllowCredentials(true);
-//                    corsConfig.setMaxAge(3600L);
-//                    return corsConfig;
-//                }))
-
 
                 // httpBasic, session 관리 등 기존 설정 유지
                 .httpBasic(AbstractHttpConfigurer::disable)
@@ -96,3 +67,15 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+
+//                // CORS 설정 추가 (예시)
+//                .cors(cors -> cors.configurationSource(request -> {
+//                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+//                    corsConfig.setAllowedOrigins(List.of("https://winna-74db4.web.app", "http://localhost:3000", "http://localhost:8080")); // 프론트엔드 도메인 설정
+//                    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//                    corsConfig.setAllowedHeaders(List.of("*"));
+//                    corsConfig.setAllowCredentials(true);
+//                    corsConfig.setMaxAge(3600L);
+//                    return corsConfig;
+//                }))
