@@ -63,7 +63,10 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .disable() // 쿠키 인증과 함께라면 disable하지 말고 위처럼 설정 권장
                 )
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .disable()
+                )
 
 
 //                // CORS 설정 추가 (예시)
