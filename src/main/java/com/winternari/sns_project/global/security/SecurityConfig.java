@@ -48,16 +48,17 @@ public class SecurityConfig {
                         .disable() // 쿠키 인증과 함께라면 disable하지 말고 위처럼 설정 권장
                 )
 
-                // CORS 설정 추가 (예시)
-                .cors(cors -> cors.configurationSource(request -> {
-                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                    corsConfig.setAllowedOrigins(List.of("https://winna-74db4.web.app", "http://localhost:3000", "http://localhost:8080")); // 프론트엔드 도메인 설정
-                    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                    corsConfig.setAllowedHeaders(List.of("*"));
-                    corsConfig.setAllowCredentials(true);
-                    corsConfig.setMaxAge(3600L);
-                    return corsConfig;
-                }))
+//                // CORS 설정 추가 (예시)
+//                .cors(cors -> cors.configurationSource(request -> {
+//                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+//                    corsConfig.setAllowedOrigins(List.of("https://winna-74db4.web.app", "http://localhost:3000", "http://localhost:8080")); // 프론트엔드 도메인 설정
+//                    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//                    corsConfig.setAllowedHeaders(List.of("*"));
+//                    corsConfig.setAllowCredentials(true);
+//                    corsConfig.setMaxAge(3600L);
+//                    return corsConfig;
+//                }))
+
 
                 // httpBasic, session 관리 등 기존 설정 유지
                 .httpBasic(AbstractHttpConfigurer::disable)
